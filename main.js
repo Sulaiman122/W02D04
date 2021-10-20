@@ -11,12 +11,27 @@ body.append(ul);
 const toDos = ["wake up", "eat breakfast", "code"];
 const ulSelector = document.querySelector(".myUl");
 
-const renderList = (newitem) => {
-    
-  toDos.forEach((item) => {
+
+
+/////////
+
+const deleteItem = (e)=>{
+e.target.remove();
+console.log(e.li);
+}
+
+
+///////
+
+const renderList = () => {
+  toDos.forEach((item, i) => {
     const li = document.createElement("li");
     li.innerHTML = item;
     ulSelector.append(li);
+    const del = document.createElement("button");
+    del.innerHTML = "delete";
+    li.append(del);
+    del.addEventListener("click",deleteItem)
   });
 };
 
@@ -28,13 +43,13 @@ input.id = "myInput";
 body.append(input);
 
 const btn = document.createElement("button");
-btn.innerHTML = "Button";
+btn.innerHTML = "add";
 body.append(btn);
 
 const inputValue = document.querySelector("#myInput");
 btn.addEventListener("click", () => {
-  if (inputValue.value.length) {
-    toDos.push(inputValue.value);
-    renderList(newitem);
-  }
+  const newLi = document.createElement("li");
+  newLi.innerHTML = inputValue.value;
+  ul.append(newLi);
 });
+
